@@ -10,14 +10,6 @@ var VideoListEntry = (props) => (
   </div>
 );
 
-// var currentVideo;
-
-// var clickFunction = (event) => {
-//   console.log(JSON.parse(event.target.id));
-//   currentVideo = JSON.parse(event.target.id)
-// };
-
-
 // PropTypes tell other developers what `props` a component expects
 // Warnings will be shown in the console when the defined rules are violated
 VideoListEntry.propTypes = {

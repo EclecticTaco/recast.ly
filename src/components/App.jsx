@@ -33,7 +33,6 @@ class App extends React.Component {
     this.setState(
       {currentVideo: JSON.parse(event.target.id)}
     );
-    console.log(JSON.parse(event.target.id));
   }
 
   render() {
