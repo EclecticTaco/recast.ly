@@ -1,14 +1,22 @@
 var VideoListEntry = (props) => (
-  <div className="video-list-entry media" id={props.video.id.videoId}>
+  <div className="video-list-entry media" id={props.video.id.videoId} >
     <div className="media-left media-middle">
       <img className="media-object" src={props.video.snippet.thumbnails.default.url} alt="" />
     </div>
     <div className="media-body">
-      <div className="video-list-entry-title">{props.video.snippet.title}</div>
+      <div className="video-list-entry-title" id={JSON.stringify(props.video)} onClick={props.clickHandler}>{props.video.snippet.title}</div>
       <div className="video-list-entry-detail">{props.video.snippet.description}</div>
     </div>
   </div>
 );
+
+// var currentVideo;
+
+// var clickFunction = (event) => {
+//   console.log(JSON.parse(event.target.id));
+//   currentVideo = JSON.parse(event.target.id)
+// };
+
 
 // PropTypes tell other developers what `props` a component expects
 // Warnings will be shown in the console when the defined rules are violated

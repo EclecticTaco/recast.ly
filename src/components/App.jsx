@@ -24,9 +24,23 @@ import Search from './Search.js';
 class App extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {currentVideo: undefined};
+    this.clickHandler = this.clickHandler.bind(this);
+  }
+
+  clickHandler(event) {
+    this.setState(
+      {currentVideo: JSON.parse(event.target.id)}
+    );
+    console.log(JSON.parse(event.target.id));
   }
 
   render() {
+    var initialVideo = (<VideoPlayer video={exampleVideoData[0]} />);
+    if (this.state.currentVideo) {
+      var newVideo = (<VideoPlayer video={this.state.currentVideo} />);
+    }
     return (
       <div>
         <nav className="navbar">
@@ -36,11 +50,10 @@ class App extends React.Component {
         </nav>
         <div className="row">
           <div className="col-md-7">
-            <div><VideoPlayer video={exampleVideoData[0]} /></div>
+            <div>{this.state.currentVideo ? newVideo : initialVideo} /></div>
           </div>
           <div className="col-md-5">
-            {/* <div><h5><em>videoList</em> view goes here</h5></div> */}
-            <div><VideoList videos={exampleVideoData} /></div>
+            <VideoList videos={exampleVideoData} clickHandler={this.clickHandler}/>
           </div>
         </div>
       </div>
