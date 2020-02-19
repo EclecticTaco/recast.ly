@@ -1,3 +1,6 @@
+import VideoList from './VideoList.js';
+import exampleVideoData from '../../src/data/exampleVideoData.js';
+
 var App = () => (
   <div>
     <nav className="navbar">
