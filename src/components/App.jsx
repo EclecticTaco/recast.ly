@@ -39,7 +39,7 @@ class App extends React.Component {
   render() {
     var initialVideo = (<VideoPlayer video={exampleVideoData[0]} />);
     if (this.state.currentVideo) {
-      var newVideo = (<VideoPlayer video={this.state.currentVideo} />);
+      var newVideo = (<VideoPlayer video={this.state.currentVideo.video} />);
     }
     return (
       <div>
