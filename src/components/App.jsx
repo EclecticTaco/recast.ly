@@ -2,31 +2,31 @@ import VideoList from './VideoList.js';
 import exampleVideoData from '../../src/data/exampleVideoData.js';
 import VideoPlayer from './VideoPlayer.js';
 import Search from './Search.js';
-
-// var App = () => (
-//   <div>
-//     <nav className="navbar">
-//       <div className="col-md-6 offset-md-3">
-//         <div><h5><em>search</em> view goes here</h5></div>
-//       </div>
-//     </nav>
-//     <div className="row">
-//       <div className="col-md-7">
-//         <div><h5><em>videoPlayer</em> view goes here</h5></div>
-//       </div>
-//       <div className="col-md-5">
-//         <div><h5><em>videoList</em> view goes here</h5></div>
-//       </div>
-//     </div>
-//   </div>
-// );
+import searchYouTube from '../lib/searchYouTube.js';
+import YOUTUBE_API_KEY from '../config/youtube.js';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {currentVideo: undefined};
+    this.state = {
+      currentVideo: exampleVideoData[0],
+      currentVideoList: exampleVideoData
+    };
+
     this.clickHandler = this.clickHandler.bind(this);
+    this.searchHandler = this.searchHandler.bind(this);
+
+    // console.log(initialVideoList);
+    // console.log(this.state.currentVideoList);
+  }
+
+  searchHandler() {
+    searchYouTube({key: YOUTUBE_API_KEY, query: 'React JS tutorial', max: 5}, function(data) {
+      this.setState(
+        {currentVideoList: data}
+      );
+    });
   }
 
   clickHandler(event) {
@@ -36,10 +36,6 @@ class App extends React.Component {
   }
 
   render() {
-    var initialVideo = (<VideoPlayer video={exampleVideoData[0]} />);
-    if (this.state.currentVideo) {
-      var newVideo = (<VideoPlayer video={this.state.currentVideo.video} />);
-    }
     return (
       <div>
         <nav className="navbar">
@@ -49,10 +45,10 @@ class App extends React.Component {
         </nav>
         <div className="row">
           <div className="col-md-7">
-            <div>{this.state.currentVideo ? newVideo : initialVideo} /></div>
+            <VideoPlayer video={this.state.currentVideo} />
           </div>
           <div className="col-md-5">
-            <VideoList videos={exampleVideoData} clickHandler={this.clickHandler}/>
+            <VideoList videos={this.state.currentVideoList} clickHandler={this.clickHandler}/>
           </div>
         </div>
       </div>

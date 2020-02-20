@@ -9,18 +9,14 @@ var searchYouTube = (options, callback) => {
       type: 'video',
       part: 'snippet',
       videoEmbeddable: true
-
     },
     success: (data) => {
-      console.log(data);
       callback(data.items);
     },
     error: (error) => {
-      console.error('Could not retrieve messages');
+      console.error('Could not retrieve videos');
     }
   });
 };
 
 export default searchYouTube;
-
-
